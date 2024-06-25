@@ -1,0 +1,9 @@
+names:
+- fruit
+- buds
+- stem
+- leaf
+nc: 4
+test: ./test
+train: ./train
+val: ./val
