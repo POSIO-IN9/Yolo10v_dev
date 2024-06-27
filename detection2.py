@@ -1,6 +1,7 @@
 from PIL import Image
 from ultralytics import YOLOv10
 import torch
+import json
 
 def detection2(imgpath):
     # 가중치 파일 경로
@@ -25,7 +26,6 @@ def detection2(imgpath):
 
     # 예측 수행
     results = model.predict(img_resized, save=True)
-    print(results)
 
     # 결과 객체가 리스트인지 확인
     if isinstance(results, list):
@@ -37,5 +37,9 @@ def detection2(imgpath):
     # 클래스 인덱스를 사용하여 클래스 이름 출력
     class_names = [results.names[index] for index in class_indices]
 
+    detected_objects = {
+        "detected_objects": class_names
+    }
+
     # 결과 출력
-    return class_names
+    return json.dumps(detected_objects, ensure_ascii=False)
